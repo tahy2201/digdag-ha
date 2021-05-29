@@ -1,0 +1,32 @@
+version: "3"
+services:
+  digdag-web:
+    build:
+      context: digdag-web
+      dockerfile: Dockerfile
+    ports:
+      - "65432:65432"
+      - "65433:65433"
+    environment: 
+      - POSTGRES_HOST=postgresql
+    
+
+  postgresql:
+    image: postgres:9
+    environment:
+      - POSTGRES_USER=digdag_master
+      - POSTGRES_PASSWORD=ddDev001
+      - POSTGRES_DB=digdag
+    volumes:
+      - data:/var/lib/postgresql/database
+    command: 
+      - postgres
+      - -c
+      - superuser_reserved_connections=30
+      - -c
+      - max_connections=1000
+    ports:
+      - "5432:5432"
+
+volumes:
+  data:
