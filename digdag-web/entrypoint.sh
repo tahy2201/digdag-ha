@@ -2,7 +2,7 @@
 set -e
 
 # rendering server.properties
-envsubst < /etc/digdag/server.properties > /etc/digdag/server.properties
+envsubst < /etc/digdag/server.properties.tmpl > /etc/digdag/server.properties
 
 host="$1"
 shift
